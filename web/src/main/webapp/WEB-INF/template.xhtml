@@ -21,14 +21,12 @@
             <div>
                 <h:form rendered="#{seguridadBean.autenticado}">
                     <p:commandButton id="menuButton" type="button" icon="pi pi-bars" styleClass="me-4"/>
-                    <p:tieredMenu overlay="true" trigger="menuButton" my="left top" at="left bottom" style="width: 300px">
+                    <p:tieredMenu overlay="true" trigger="menuButton" my="left top" at="left bottom"
+                                  style="width: 300px">
                         <p:submenu label="Configuraciones" icon="pi pi-fw pi-cog">
-                            <p:menuitem value="Administrar Cargos" icon="pi pi-fw pi-users"/>
                             <p:menuitem value="Administrar Procesos" icon="pi pi-fw pi-check-circle"/>
                             <p:menuitem value="Administrar indicadores" icon="pi pi-fw pi-chart-bar"/>
-
                         </p:submenu>
-
 
                         <p:divider/>
 
@@ -40,7 +38,7 @@
             </div>
 
             <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                <h:graphicImage library="img" name="iconoPrincipal.png" styleClass="icono-p" />
+                <h:graphicImage library="img" name="iconoPrincipal.png" styleClass="icono-p"/>
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
