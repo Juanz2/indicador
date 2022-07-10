@@ -1,0 +1,42 @@
+.icono-p {
+    width: 50px;
+    margin-right: 10px;
+}
+.card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.imagen-hotel{
+    width: 100%;
+}
+
+.ciudad-item .ciudad-item-content {
+    border: 1px solid var(--surface-d);
+    border-radius: 3px;
+    margin: .3rem;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.ciudad-item .ciudad-image {
+    width: 50%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+}
+
+.ciudad-foto{
+    width: 400px;
+    height: 700px;
+    object-fit: cover;
+}
+
+.chipCama {
+    background: #0d6efd;
+}
+
+.menuConfiguracion {
+    background: #0d6efd;
+    color: white;
+}

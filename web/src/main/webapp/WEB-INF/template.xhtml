@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="styleUni.css"/>
+    <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
+    <title><ui:insert name="title">Título</ui:insert></title>
+</h:head>
+<h:body>
+    <div id="encabezado" class="p-3 bg-primary text-white">
+
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+            <div>
+                <h:form rendered="#{seguridadBean.autenticado}">
+                    <p:commandButton id="menuButton" type="button" icon="pi pi-bars" styleClass="me-4"/>
+                    <p:tieredMenu overlay="true" trigger="menuButton" my="left top" at="left bottom" style="width: 300px">
+                        <p:submenu label="Configuraciones" icon="pi pi-fw pi-cog">
+                            <p:menuitem value="Administrar Cargos" icon="pi pi-fw pi-users"/>
+                            <p:menuitem value="Administrar Procesos" icon="pi pi-fw pi-check-circle"/>
+                            <p:menuitem value="Administrar indicadores" icon="pi pi-fw pi-chart-bar"/>
+
+                        </p:submenu>
+
+
+                        <p:divider/>
+
+                        <p:submenu label="Seguridad" icon="pi pi-lock">
+                            <p:menuitem value="Administrar Usuarios" icon="pi pi-user-plus"/>
+                        </p:submenu>
+                    </p:tieredMenu>
+                </h:form>
+            </div>
+
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <h:graphicImage library="img" name="iconoPrincipal.png" styleClass="icono-p" />
+            </a>
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-2 text-white">Indicadores</a></li>
+            </ul>
+
+
+            <h:form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search"
+                    rendered="#{seguridadBean.autenticado}">
+                <div class="input-search ui-inputgroup">
+                    <p:inputText type="search" class="form-control form-control-dark text-white bg-dark"
+                                 placeholder="Buscar..." aria-label="Search"/>
+                    <p:commandButton update="@form" icon="pi pi-search"/>
+                </div>
+            </h:form>
+
+
+            <h:form rendered="#{seguridadBean.autenticado}">
+
+                <h:graphicImage id="dynaButton" library="img" name="icon-user.png" styleClass="icono-p"/>
+                <i class="pi pi-caret-down"/>
+                <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
+                    <p:submenu>
+                        <p:menuitem value="Perfil" ajax="false"
+                                    icon="pi pi-user"/>
+                        <p:menuitem value="Cerrar sesión" action="#{seguridadBean.cerrarSesion()}"
+                                    icon="pi pi-sign-out"/>
+                    </p:submenu>
+                </p:menu>
+            </h:form>
+        </div>
+    </div>
+
+    <div id="content">
+        <ui:insert name="content">Contenido</ui:insert>
+    </div>
+
+    <h:form rendered="#{seguridadBean.autenticado}">
+        <div id="footer">
+            <footer class="bg-light text-center text-white">
+                <!-- Grid container -->
+                <div class="container p-4 pb-0">
+                    <!-- Section: Social media -->
+                    <section class="mb-4">
+                        <!-- Facebook -->
+                        <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #3b5998;"
+                                href="#!"
+                                role="button"
+                        ><i class="pi pi-facebook"></i
+                        ></a>
+                        <!-- Twitter -->
+                        <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #55acee;"
+                                href="#!"
+                                role="button"
+                        ><i class="pi pi-twitter"></i
+                        ></a>
+                        <!-- Google -->
+                        <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #dd4b39;"
+                                href="#!"
+                                role="button"
+                        ><i class="pi pi-google"></i
+                        ></a>
+                        <!-- Instagram -->
+                        <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #ac2bac;"
+                                href="#!"
+                                role="button"
+                        ><i class="pi pi-instagram"></i
+                        ></a>
+                        <!-- Linkedin -->
+                        <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #0082ca;"
+                                href="#!"
+                                role="button"
+                        ><i class="pi pi-linkedin"></i
+                        ></a>
+                        <!-- Github -->
+                        <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #333333;"
+                                href="#!"
+                                role="button"
+                        ><i class="pi pi-github"></i
+                        ></a>
+                    </section>
+                    <!-- Section: Social media -->
+                </div>
+                <!-- Grid container -->
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: #0d6efd;">
+                    © 2022 Copyright:
+                    <a class="text-white" href="https://toc.com.co/">www.toc.com.co</a>
+                </div>
+                <!-- Copyright -->
+            </footer>
+        </div>
+    </h:form>
+
+</h:body>
+</html>
