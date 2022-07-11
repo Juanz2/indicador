@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/template.xhtml">
+    <ui:define name="title">Administrar usuarios</ui:define>
+    <ui:define name="content">
+
+        <div id="contenido" class="container">
+            <br/>
+            <p:panel header="Administración de usuarios" id="panelPrincipal">
+
+                <h:form id="formularioUsuario">
+                    <p:growl showDetail="true"/>
+                    <h:panelGrid columns="2" cellpadding="5" style="margin: 0 auto;" id="panelGrid">
+
+                        <p:outputLabel for="name" value="Nombre"/>
+                        <p:inputText id="name" value="#{usuarioBean.usuario.nombre}" required="true"
+                                     style="width: 300px"/>
+
+                        <p:outputLabel for="apellido" value="Apellido"/>
+                        <p:inputText id="apellido" value="#{usuarioBean.usuario.apellido}" required="true"
+                                     style="width: 300px"/>
+
+                        <p:outputLabel for="email" value="Correo"/>
+                        <p:inputText id="email" value="#{usuarioBean.usuario.email}" required="true"
+                                     style="width: 300px"/>
+
+                        <p:outputLabel for="procesosCheck" value="Proceso(s) *"/>
+                        <p:selectManyCheckbox id="procesosCheck" value="#{usuarioBean.listaProcesosSeleccionados}"
+                                              layout="grid" columns="3"
+                                              converter="#{procesoConverter}">
+                            <f:selectItems value="#{usuarioBean.listaProcesos}" var="proceso"
+                                           itemLabel="#{proceso.nombre}" itemValue="#{proceso}"/>
+                        </p:selectManyCheckbox>
+                    </h:panelGrid>
+                    <br/>
+                    <h:panelGrid cellpadding="5" columns="2" style="margin: 0 auto;">
+                        <p:commandButton value="Guardar" icon="pi pi-check" styleClass="ui-button-success"
+                                         action="#{usuarioBean.registrarUsuario()}" update="panelPrincipal">
+                        </p:commandButton>
+
+                        <p:commandButton value="Cancelar" icon="pi pi-times"
+                                         styleClass="ui-button-danger" update="panelGrid" process="@this">
+                            <p:resetInput target="panelGrid"/>
+                        </p:commandButton>
+
+                    </h:panelGrid>
+
+
+                    <p:separator/>
+
+                    <p:dataTable var="usuario" value="#{usuarioBean.listaUsuarios}" rows="10" paginator="true"
+                                 id="tableUsuario">
+
+                        <f:facet name="header">
+                            <div>
+                        <span class="filter-container ui-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <p:inputText id="globalFilter" onkeyup="PF('tableUsuario').filter()" placeholder="Buscar"
+                                     style="width: 400px;"/>
+                    </span>
+                            </div>
+                        </f:facet>
+
+
+                        <p:column headerText="Nombres">
+                            <h:outputText value="#{usuario.nombre}"/>
+                        </p:column>
+
+                        <p:column headerText="Apellidos">
+                            <h:outputText value="#{usuario.apellido}"/>
+                        </p:column>
+
+                        <p:column headerText="Correo">
+                            <h:outputText value="#{usuario.email}"/>
+                        </p:column>
+
+                        <p:column headerText="opciones">
+                            <p:commandButton icon="pi pi-pencil" update="formularioUsuario:panelGrid"
+                                             styleClass="edit-button rounded-button ui-button-success me-2"
+                                             actionListener="#{usuarioBean.seleccionarUsuario(usuario)}">
+                            </p:commandButton>
+
+                            <p:commandButton icon="pi pi-trash"
+                                             styleClass="ui-button-warning rounded-button">
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:panel>
+        </div>
+
+
+    </ui:define>
+</ui:composition>
+</html>

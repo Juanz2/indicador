@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true, onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Usuario implements Serializable {
 
     @Id
@@ -34,4 +36,8 @@ public class Usuario implements Serializable {
 
     @Column(nullable = false, length = 1)
     private String estado;
+
+    @ManyToMany
+    @ToString.Exclude
+    private List<Proceso> procesos;
 }

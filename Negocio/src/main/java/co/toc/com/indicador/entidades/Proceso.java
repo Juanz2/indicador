@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true, onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Proceso implements Serializable {
 
     @Id
@@ -40,4 +42,7 @@ public class Proceso implements Serializable {
         }
         return "3616866.png";
     }
+    @ManyToMany(mappedBy = "procesos")
+    @ToString.Exclude
+    private List<Usuario> usuarios;
 }

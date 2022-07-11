@@ -8,24 +8,26 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProcesoServicioImp implements ProcesoServicio{
+public class ProcesoServicioImp implements ProcesoServicio {
 
     @Autowired
     private ProcesoRepo procesoRepo;
 
     @Override
     public Proceso registrarProceso(Proceso proceso) throws Exception {
-        return null;
+        return procesoRepo.save(proceso);
     }
 
     @Override
     public Proceso obtenerProceso(Integer id) throws Exception {
-        return null;
+        return procesoRepo.findById(id).orElse(null);
     }
 
     @Override
     public void inactivarProceso(Proceso proceso) throws Exception {
 
+        proceso.setEstado("I");
+        procesoRepo.save(proceso);
     }
 
     @Override

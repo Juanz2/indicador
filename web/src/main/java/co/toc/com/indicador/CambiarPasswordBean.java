@@ -34,6 +34,9 @@ public class CambiarPasswordBean {
     private String usuarioCambio;
 
 
+    /**
+     * Permite modificar la contraseña del usuario
+     */
     public void cambiarPassword() {
 
         if (!password1.equals(password2)) {
