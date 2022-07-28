@@ -34,4 +34,9 @@ public class ProcesoServicioImp implements ProcesoServicio {
     public List<Proceso> obtenerProcesos() {
         return procesoRepo.obtenerProcesos();
     }
+
+    @Override
+    public List<Proceso> obtenerProcesosUsuario(int idUsuario) {
+        return procesoRepo.obtenerProcesosUsuario(idUsuario);
+    }
 }

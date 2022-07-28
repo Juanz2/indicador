@@ -6,7 +6,6 @@ import co.toc.com.indicador.servicios.ProcesoServicio;
 import co.toc.com.indicador.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
-import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,7 +33,11 @@ public class UsuarioBean implements Serializable {
     private List<Proceso> listaProcesos;
     @Getter
     @Setter
-    private Usuario usuario;
+    private Usuario usuarioCrear;
+
+    @Getter
+    @Setter
+    private Usuario usuarioSeleccionado;
 
     @Getter
     @Setter
@@ -44,10 +47,13 @@ public class UsuarioBean implements Serializable {
     @Setter
     private List<Usuario> listaUsuarios;
 
+    @Getter
+    @Setter
+    private int tipoOperacion = 1;
+
     @PostConstruct
     public void init() {
-        usuario = new Usuario();
-        usuario.setEstado("A");
+        usuarioCrear = new Usuario();
         listaProcesosSeleccionados = new ArrayList<>();
         listaProcesos = procesoServicio.obtenerProcesos();
         listaUsuarios = usuarioServicio.obtenerUsuarios();
@@ -59,19 +65,15 @@ public class UsuarioBean implements Serializable {
     public String registrarUsuario() {
 
         try {
-            if (listaProcesosSeleccionados.isEmpty()) {
-                FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notificación\n", "El usuario debe tener al menos un proceso relacionado");
-                FacesContext.getCurrentInstance().addMessage(null, msj);
-            } else {
-                usuario.setProcesos(listaProcesosSeleccionados);
-                usuario.setPassword("new@Pass#%%12");
-                usuarioServicio.registrarUsuario(usuario, 1);
-                FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta\n", "Procesado correctamente");
-                FacesContext.getCurrentInstance().addMessage(null, msj);
-                usuario = new Usuario();
-                listaUsuarios = usuarioServicio.obtenerUsuarios();
-                return "/administrarUsuarios?faces-redirect=true";
-            }
+
+
+            usuarioCrear.setEstado("A");
+            usuarioCrear.setProcesos(listaProcesosSeleccionados);
+            usuarioCrear.setPassword("new@Pass#%%12");
+            usuarioServicio.registrarUsuario(usuarioCrear, tipoOperacion);
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta\n", "Procesado correctamente");
+            FacesContext.getCurrentInstance().addMessage(null, msj);
+            return "/administrarUsuarios?faces-redirect=true";
 
         } catch (Exception e) {
             FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta\n", e.getMessage());
@@ -82,9 +84,27 @@ public class UsuarioBean implements Serializable {
 
     /**
      * Selecciona el usuario de la tabla
+     *
      * @param u usuario
      */
-    public void seleccionarUsuario(Usuario u) {
-        this.usuario = u;
+    public void seleccionarUsuario(Usuario u, int tipoOperacion) {
+        this.usuarioCrear = u;
+        this.listaProcesosSeleccionados = procesoServicio.obtenerProcesosUsuario(u.getIdUsuario());
+        this.tipoOperacion = tipoOperacion;
+    }
+
+    public String inactivarUsuario() {
+
+        usuarioCrear.setEstado("I");
+        try {
+            usuarioServicio.registrarUsuario(usuarioCrear, 2);
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta\n", "Procesado correctamente");
+            FacesContext.getCurrentInstance().addMessage(null, msj);
+            return "/administrarUsuarios?faces-redirect=true";
+        } catch (Exception e) {
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notificación\n", "Error al actualizar el usuario");
+            FacesContext.getCurrentInstance().addMessage(null, msj);
+        }
+        return null;
     }
 }

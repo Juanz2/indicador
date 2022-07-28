@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
     <h:outputStylesheet library="css" name="styleUni.css"/>
-    <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
     <title><ui:insert name="title">Título</ui:insert></title>
 </h:head>
 <h:body>
@@ -19,7 +18,7 @@
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
             <div>
-                <h:form rendered="#{seguridadBean.autenticado}">
+                <h:form>
                     <p:commandButton id="menuButton" type="button" icon="pi pi-bars" styleClass="me-4"/>
                     <p:tieredMenu overlay="true" trigger="menuButton" my="left top" at="left bottom"
                                   style="width: 300px">
@@ -72,7 +71,7 @@
         </div>
     </div>
 
-    <div id="content">
+    <div id="content" class="container">
         <ui:insert name="content">Contenido</ui:insert>
     </div>
 

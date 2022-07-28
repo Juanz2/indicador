@@ -10,6 +10,9 @@ import java.util.List;
 @Repository
 public interface ProcesoRepo extends JpaRepository<Proceso, Integer> {
 
-    @Query("select p from Proceso p where p.estado = 'A'")
+    @Query(value = "select p from Proceso p where p.estado = 'A'")
     List<Proceso> obtenerProcesos();
+
+    @Query("select p from Proceso p join p.usuarios u where u.idUsuario = :id")
+    List<Proceso> obtenerProcesosUsuario(int id);
 }

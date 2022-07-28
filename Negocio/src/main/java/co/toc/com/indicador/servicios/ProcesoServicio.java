@@ -13,4 +13,6 @@ public interface ProcesoServicio {
     void inactivarProceso(Proceso proceso) throws Exception;
 
     List<Proceso> obtenerProcesos();
+
+    List<Proceso> obtenerProcesosUsuario(int idUsuario);
 }

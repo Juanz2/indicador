@@ -9,24 +9,23 @@
     <ui:define name="title">Administrar usuarios</ui:define>
     <ui:define name="content">
 
-        <div id="contenido" class="container">
-            <br/>
-            <p:panel header="Administración de usuarios" id="panelPrincipal">
+        <br/>
+        <h:form id="formUsuario">
 
-                <h:form id="formularioUsuario">
-                    <p:growl showDetail="true"/>
+            <p:panel header="Administración de usuarios" id="panelPrincipal">
+                <p:growl showDetail="true" id="growl1"/>
                     <h:panelGrid columns="2" cellpadding="5" style="margin: 0 auto;" id="panelGrid">
 
                         <p:outputLabel for="name" value="Nombre"/>
-                        <p:inputText id="name" value="#{usuarioBean.usuario.nombre}" required="true"
+                        <p:inputText id="name" value="#{usuarioBean.usuarioCrear.nombre}" required="true"
                                      style="width: 300px"/>
 
                         <p:outputLabel for="apellido" value="Apellido"/>
-                        <p:inputText id="apellido" value="#{usuarioBean.usuario.apellido}" required="true"
+                        <p:inputText id="apellido" value="#{usuarioBean.usuarioCrear.apellido}" required="true"
                                      style="width: 300px"/>
 
                         <p:outputLabel for="email" value="Correo"/>
-                        <p:inputText id="email" value="#{usuarioBean.usuario.email}" required="true"
+                        <p:inputText id="email" value="#{usuarioBean.usuarioCrear.email}" required="true"
                                      style="width: 300px"/>
 
                         <p:outputLabel for="procesosCheck" value="Proceso(s) *"/>
@@ -37,63 +36,73 @@
                                            itemLabel="#{proceso.nombre}" itemValue="#{proceso}"/>
                         </p:selectManyCheckbox>
                     </h:panelGrid>
-                    <br/>
-                    <h:panelGrid cellpadding="5" columns="2" style="margin: 0 auto;">
-                        <p:commandButton value="Guardar" icon="pi pi-check" styleClass="ui-button-success"
-                                         action="#{usuarioBean.registrarUsuario()}" update="panelPrincipal">
-                        </p:commandButton>
+                <br/>
+                <h:panelGrid cellpadding="5" columns="2" style="margin: 0 auto;">
+                    <p:commandButton value="Guardar" icon="pi pi-check" styleClass="ui-button-success"
+                                     action="#{usuarioBean.registrarUsuario()}" update="panelPrincipal">
+                    </p:commandButton>
 
-                        <p:commandButton value="Cancelar" icon="pi pi-times"
-                                         styleClass="ui-button-danger" update="panelGrid" process="@this">
-                            <p:resetInput target="panelGrid"/>
-                        </p:commandButton>
+                    <p:commandButton value="Cancelar" icon="pi pi-times"
+                                     styleClass="ui-button-danger" update="panelGrid" process="@this">
+                        <p:resetInput target="panelGrid"/>
+                    </p:commandButton>
 
-                    </h:panelGrid>
+                </h:panelGrid>
 
 
-                    <p:separator/>
+                <p:dataTable var="usuario" value="#{usuarioBean.listaUsuarios}" rows="10" paginator="true"
+                             id="tableUsuario">
 
-                    <p:dataTable var="usuario" value="#{usuarioBean.listaUsuarios}" rows="10" paginator="true"
-                                 id="tableUsuario">
-
-                        <f:facet name="header">
-                            <div>
+                    <f:facet name="header">
+                        <div>
                         <span class="filter-container ui-input-icon-left">
-                        <i class="pi pi-search"></i>
+                        <i class="pi pi-search"/>
                         <p:inputText id="globalFilter" onkeyup="PF('tableUsuario').filter()" placeholder="Buscar"
                                      style="width: 400px;"/>
                     </span>
-                            </div>
-                        </f:facet>
+                        </div>
+                    </f:facet>
 
 
-                        <p:column headerText="Nombres">
-                            <h:outputText value="#{usuario.nombre}"/>
-                        </p:column>
+                    <p:column headerText="Nombres">
+                        <h:outputText value="#{usuario.nombre}"/>
+                    </p:column>
 
-                        <p:column headerText="Apellidos">
-                            <h:outputText value="#{usuario.apellido}"/>
-                        </p:column>
+                    <p:column headerText="Apellidos">
+                        <h:outputText value="#{usuario.apellido}"/>
+                    </p:column>
 
-                        <p:column headerText="Correo">
-                            <h:outputText value="#{usuario.email}"/>
-                        </p:column>
+                    <p:column headerText="Correo">
+                        <h:outputText value="#{usuario.email}"/>
+                    </p:column>
 
-                        <p:column headerText="opciones">
-                            <p:commandButton icon="pi pi-pencil" update="formularioUsuario:panelGrid"
-                                             styleClass="edit-button rounded-button ui-button-success me-2"
-                                             actionListener="#{usuarioBean.seleccionarUsuario(usuario)}">
-                            </p:commandButton>
+                    <p:column headerText="opciones">
+                        <p:commandButton icon="pi pi-pencil" update="formUsuario:panelGrid"
+                                         styleClass="edit-button rounded-button ui-button-success me-2"
+                                         actionListener="#{usuarioBean.seleccionarUsuario(usuario,2)}" process="@this">
+                        </p:commandButton>
 
-                            <p:commandButton icon="pi pi-trash"
-                                             styleClass="ui-button-warning rounded-button">
-                            </p:commandButton>
-                        </p:column>
-                    </p:dataTable>
-                </h:form>
+                        <p:commandButton icon="pi pi-trash"
+                                         styleClass="ui-button-warning rounded-button"  oncomplete="PF('deleteDialog').show()"
+                                         actionListener="#{usuarioBean.seleccionarUsuario(usuario,2)}" process="@this">
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
             </p:panel>
-        </div>
+        </h:form>
 
+        <p:confirmDialog id="eliminar" widgetVar="deleteDialog" showEffect="fade" width="300"
+                         message="¿Desea eliminar el usuario?" header="Confirmación" severity="warn">
+            <h:form>
+                <p:commandButton value="Si" icon="pi pi-check" action="#{usuarioBean.inactivarUsuario}"
+                                 oncomplete="PF('deleteDialog').hide()"/>
+                <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                 onclick="PF('deleteDialog').hide()"/>
+
+                <p:growl for="hotelDelete-bean" showDetail="true"/>
+
+            </h:form>
+        </p:confirmDialog>
 
     </ui:define>
 </ui:composition>
