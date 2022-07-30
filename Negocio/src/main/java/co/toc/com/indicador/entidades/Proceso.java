@@ -29,6 +29,9 @@ public class Proceso implements Serializable {
     @Column(nullable = false, length = 1)
     private String estado;
 
+    @OneToMany(mappedBy = "proceso")
+    private List<Indicador> indicadores;
+
 
     /**
      * Obtiene la foto del proceso

@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/template.xhtml">
+    <ui:define name="title">Adminstrar Indicadores</ui:define>
+    <ui:define name="content">
+
+        <br/>
+        <h:form id="formIndicador">
+            <p:panel header="Administración de indicadores" id="panelPrincipal" styleClass="panel">
+                <p:growl showDetail="true"/>
+                <h:panelGrid columns="2" cellpadding="5" style="margin: 0 auto;" id="panelGrid">
+
+                    <p:outputLabel for="name" value="Nombre:"/>
+                    <p:inputText id="name" value="#{indicadorBean.indicador.nombre}" required="true"
+                                 style="width: 300px;"/>
+
+                    <p:outputLabel for="id_proceso" value="Proceso:"/>
+                    <p:selectOneMenu id="id_proceso" value="#{indicadorBean.indicador.proceso}" required="true"
+                                     requiredMessage="El proceso es obligatorio" converter="#{procesoConverter}"
+                                     style="width: 300px;">
+                        <f:selectItem itemLabel="Seleccione el proceso" noSelectionOption="true"/>
+                        <f:selectItems var="procesoItem" itemLabel="#{procesoItem.nombre}"
+                                       value="#{usuarioBean.listaProcesos}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="tendencia" value="Tendencia:"/>
+                    <p:selectOneMenu id="tendencia" value="#{indicadorBean.indicador.tendencia}" required="true"
+                                     style="width: 300px;">
+                        <f:selectItem itemLabel="Seleccione la tendencia" noSelectionOption="true"/>
+                        <f:selectItem itemLabel="Ascendente" itemValue="Ascendente"/>
+                        <f:selectItem itemLabel="Descendente" itemValue="Descendente"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="limiteInferior" value="Limite inferior:"/>
+                    <p:inputNumber id="limiteInferior" value="#{indicadorBean.indicador.limiteInferior}" style="background: #1a1e21"
+                                   decimalPlaces="0"  required="true"/>
+
+                    <p:outputLabel for="limiteSuperior" value="Limite superior:"/>
+                    <p:inputNumber id="limiteSuperior" value="#{indicadorBean.indicador.limiteSuperior}"
+                                   decimalPlaces="0" style="width: 300px;" required="true"/>
+                </h:panelGrid>
+
+                <br/>
+                <h:panelGrid cellpadding="5" columns="2" style="margin: 0 auto;">
+                    <p:commandButton value="Guardar" icon="pi pi-check" styleClass="ui-button-success"
+                                     action="#{indicadorBean.registrarIndicador}" update="panelPrincipal">
+                    </p:commandButton>
+
+                    <p:commandButton value="Cancelar" icon="pi pi-times"
+                                     styleClass="ui-button-danger" update="panelGrid" process="@this">
+                        <p:resetInput target="panelGrid"/>
+                    </p:commandButton>
+                </h:panelGrid>
+
+
+                <p:dataTable var="indicador" value="#{indicadorBean.listaIndicadores}" rows="10" paginator="true"
+                             id="tablaIndicador">
+
+                    <f:facet name="header">
+                        <div>
+                        <span class="filter-container ui-input-icon-left">
+                        <i class="pi pi-search"/>
+                        <p:inputText id="globalFilter" onkeyup="PF('tablaIndicador').filter()" placeholder="Buscar"
+                                     style="width: 400px;"/>
+                    </span>
+                        </div>
+                    </f:facet>
+
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{indicador.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Proceso">
+                        <h:outputText value="#{indicador.proceso.nombre}"/>
+                    </p:column>
+
+
+                    <p:column headerText="Tendencia">
+                        <h:outputText value="#{indicador.tendencia}"/>
+                    </p:column>
+
+                    <p:column headerText="Limite inferior">
+                        <h:outputText value="#{indicador.limiteInferior}"/>
+                    </p:column>
+
+                    <p:column headerText="Limite superior">
+                        <h:outputText value="#{indicador.limiteSuperior}"/>
+                    </p:column>
+
+
+                    <p:column headerText="opciones">
+                        <p:commandButton icon="pi pi-pencil" update="formIndicador:panelGrid"
+                                         styleClass="edit-button rounded-button ui-button-success me-2"
+                                         actionListener="#{indicadorBean.seleccionarIndicador(indicador)}"
+                                         process="@this">
+                        </p:commandButton>
+
+                        <p:commandButton icon="pi pi-trash"
+                                         styleClass="ui-button-warning rounded-button"
+                                         oncomplete="PF('deleteDialog').show()"
+                                         actionListener="#{indicadorBean.seleccionarIndicador(indicador)}"
+                                         process="@this">
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+
+
+            </p:panel>
+        </h:form>
+
+
+        <p:confirmDialog id="eliminar" widgetVar="deleteDialog" showEffect="fade" width="300"
+                         message="¿Desea eliminar el indicador?" header="Confirmación" severity="warn">
+            <h:form>
+                <p:commandButton value="Si" icon="pi pi-check" action="#{indicadorBean.inactivarIndicador}"
+                                 oncomplete="PF('deleteDialog').hide()"/>
+                <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                 onclick="PF('deleteDialog').hide()"/>
+
+                <p:growl for="hotelDelete-bean" showDetail="true"/>
+
+            </h:form>
+        </p:confirmDialog>
+    </ui:define>
+</ui:composition>
+</html>

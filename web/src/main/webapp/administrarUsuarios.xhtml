@@ -16,19 +16,19 @@
                 <p:growl showDetail="true" id="growl1"/>
                     <h:panelGrid columns="2" cellpadding="5" style="margin: 0 auto;" id="panelGrid">
 
-                        <p:outputLabel for="name" value="Nombre"/>
+                        <p:outputLabel for="name" value="Nombre:"/>
                         <p:inputText id="name" value="#{usuarioBean.usuarioCrear.nombre}" required="true"
                                      style="width: 300px"/>
 
-                        <p:outputLabel for="apellido" value="Apellido"/>
+                        <p:outputLabel for="apellido" value="Apellido:"/>
                         <p:inputText id="apellido" value="#{usuarioBean.usuarioCrear.apellido}" required="true"
                                      style="width: 300px"/>
 
-                        <p:outputLabel for="email" value="Correo"/>
+                        <p:outputLabel for="email" value="Correo:"/>
                         <p:inputText id="email" value="#{usuarioBean.usuarioCrear.email}" required="true"
                                      style="width: 300px"/>
 
-                        <p:outputLabel for="procesosCheck" value="Proceso(s) *"/>
+                        <p:outputLabel for="procesosCheck" value="Proceso(s): *"/>
                         <p:selectManyCheckbox id="procesosCheck" value="#{usuarioBean.listaProcesosSeleccionados}"
                                               layout="grid" columns="3"
                                               converter="#{procesoConverter}">

@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,17 +21,26 @@ public class Indicador implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idIndicador;
 
-    /*
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
+    private String nombre;
+
+    @ManyToOne
     private Proceso proceso;
-    */
+
     @Column(length = 20, nullable = false)
     private String tendencia;
+
     @Column(nullable = false)
     private Integer limiteInferior;
+
     @Column(nullable = false)
     private Integer limiteSuperior;
+
     @Column(length = 1, nullable = false)
     private String estado;
+
+    @OneToMany(mappedBy = "indicador")
+    private List<RegistroIndicador> registroIndicadores;
+
 
 }

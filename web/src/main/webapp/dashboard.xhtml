@@ -21,7 +21,11 @@
                             #{proceso.nombre}
                         </f:facet>
                         <f:facet name="footer">
-                            <p:commandButton icon="pi pi-arrow-right" iconPos="right" value="Ver Detalle"/>
+                            <p:commandButton icon="pi pi-plus-circle" iconPos="right" value="Registrar" styleClass="m-5"/>
+                        </f:facet>
+
+                        <f:facet name="footer">
+                            <p:commandButton icon="pi pi-eye" iconPos="right" value="Visualizar"/>
                         </f:facet>
                     </p:card>
                 </p:dataViewGridItem>
@@ -40,9 +44,18 @@
                             </p:outputPanel>
                         </div>
                         <div class="col-lg-2 col-md-1 align-self-center">
-                            <p:commandButton value="Ver detalle" styleClass="ui-button-raised" icon="pi pi-arrow-right"
-                                             iconPos="right"/>
+                            <p:commandButton value="Registrar" styleClass="ui-button-raised" icon="pi pi-plus-circle"
+                                             iconPos="right" style="width: 130px;"/>
+
+                            <p:separator/>
+                            <p:commandButton value="Visualizar" styleClass="ui-button-raised" icon="pi pi-eye"
+                                             iconPos="right" style="width: 130px;"/>
                         </div>
+
+
+
+
+
                     </div>
                 </p:dataViewListItem>
             </p:dataView>

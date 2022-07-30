@@ -24,7 +24,7 @@
                                   style="width: 300px">
                         <p:submenu label="Configuraciones" icon="pi pi-fw pi-cog">
                             <p:menuitem outcome="administrarProcesos" value="Administrar Procesos" icon="pi pi-fw pi-check-circle"/>
-                            <p:menuitem value="Administrar indicadores" icon="pi pi-fw pi-chart-bar"/>
+                            <p:menuitem outcome="administrarIndicadores" value="Administrar indicadores" icon="pi pi-fw pi-chart-bar"/>
                         </p:submenu>
 
                         <p:divider/>
@@ -44,15 +44,6 @@
                 <li><a href="dashboard.xhtml" class="nav-link px-2 text-white">Indicadores</a></li>
             </ul>
 
-
-            <h:form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search"
-                    rendered="#{seguridadBean.autenticado}">
-                <div class="input-search ui-inputgroup">
-                    <p:inputText type="search" class="form-control form-control-dark text-white bg-dark"
-                                 placeholder="Buscar..." aria-label="Search"/>
-                    <p:commandButton update="@form" icon="pi pi-search"/>
-                </div>
-            </h:form>
 
 
             <h:form rendered="#{seguridadBean.autenticado}">

@@ -40,4 +40,7 @@ public class Usuario implements Serializable {
     @ManyToMany
     @ToString.Exclude
     private List<Proceso> procesos;
+
+    @OneToMany(mappedBy = "usuarioCreacion")
+    private List<RegistroIndicador> registroIndicadores;
 }
