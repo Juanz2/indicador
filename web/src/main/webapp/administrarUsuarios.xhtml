@@ -12,7 +12,7 @@
         <br/>
         <h:form id="formUsuario">
 
-            <p:panel header="Administración de usuarios" id="panelPrincipal">
+            <p:panel header="Administración de usuarios" id="panelPrincipal" styleClass="ui-panel">
                 <p:growl showDetail="true" id="growl1"/>
                     <h:panelGrid columns="2" cellpadding="5" style="margin: 0 auto;" id="panelGrid">
 
@@ -64,7 +64,7 @@
                     </f:facet>
 
 
-                    <p:column headerText="Nombres">
+                    <p:column headerText="Nombre">
                         <h:outputText value="#{usuario.nombre}"/>
                     </p:column>
 

@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/template.xhtml">
+    <ui:define name="title">Adminstrar procesos</ui:define>
+    <ui:define name="content">
+
+
+        <br/>
+
+        <h:form id="formProceso">
+            <p:panel header="Administración de procesos" id="panelPrincipal" styleClass="panel">
+                <p:growl showDetail="true"/>
+
+                <h:panelGrid columns="2" cellpadding="5" style="margin: 0 auto;" id="panelGrid">
+
+                    <p:outputLabel for="name" value="Nombre:"/>
+                    <p:inputText id="name" value="#{procesoBean.proceso.nombre}" required="true" style="width: 500px;"/>
+
+                    <p:outputLabel for="imagen" value="Imagen: "/>
+                    <p:fileUpload id="imagen"
+                                  listener="#{procesoBean.subirImagenes}" mode="advanced"
+                                  multiple="true" sizeLimit="1000000" fileLimit="5"
+                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" uploadLabel="Cargar" cancelLabel="Cancelar"/>
+
+                </h:panelGrid>
+                <br/>
+                <h:panelGrid cellpadding="5" columns="2" style="margin: 0 auto;">
+                    <p:commandButton value="Guardar" icon="pi pi-check" styleClass="ui-button-success"
+                                     action="#{procesoBean.registrarProceso}" update="panelPrincipal">
+                    </p:commandButton>
+
+                    <p:commandButton value="Cancelar" icon="pi pi-times"
+                                     styleClass="ui-button-danger" update="panelGrid" process="@this">
+                        <p:resetInput target="panelGrid"/>
+                    </p:commandButton>
+
+                </h:panelGrid>
+
+                <p:dataTable var="proceso" value="#{procesoBean.listaProcesos}" rows="10" paginator="true"
+                             id="tableProceso">
+                    <f:facet name="header">
+                        <div>
+                        <span class="filter-container ui-input-icon-left">
+                        <i class="pi pi-search"/>
+                        <p:inputText id="globalFilter" onkeyup="PF('tableUsuario').filter()" placeholder="Buscar"
+                                     style="width: 400px;"/>
+                    </span>
+                        </div>
+                    </f:facet>
+
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{proceso.nombre}"/>
+                    </p:column>
+
+
+                    <p:column headerText="Imagen" exportable="false">
+                        <img alt="Proceso header" src="uploads/#{proceso.imagenPrincipal}"   style="width: 70px;"/>
+                    </p:column>
+
+                    <p:column headerText="opciones">
+                        <p:commandButton icon="pi pi-pencil" update="formProceso:panelGrid"
+                                         styleClass="edit-button rounded-button ui-button-success me-2"
+                                         actionListener="#{procesoBean.seleccionarProceso(proceso)}" process="@this">
+                        </p:commandButton>
+
+                        <p:commandButton icon="pi pi-trash"
+                                         styleClass="ui-button-warning rounded-button"
+                                         oncomplete="PF('deleteDialog').show()"
+                                         actionListener="#{procesoBean.seleccionarProceso(proceso)}" process="@this">
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+
+
+            </p:panel>
+        </h:form>
+
+
+        <p:confirmDialog id="eliminar" widgetVar="deleteDialog" showEffect="fade" width="300"
+                         message="¿Desea eliminar el proceso?" header="Confirmación" severity="warn">
+            <h:form>
+                <p:commandButton value="Si" icon="pi pi-check" action="#{procesoBean.inactivarProceso}"
+                                 oncomplete="PF('deleteDialog').hide()"/>
+                <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                 onclick="PF('deleteDialog').hide()"/>
+
+                <p:growl for="hotelDelete-bean" showDetail="true"/>
+
+            </h:form>
+        </p:confirmDialog>
+
+    </ui:define>
+</ui:composition>
+</html>
