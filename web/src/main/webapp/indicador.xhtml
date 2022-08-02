@@ -11,23 +11,36 @@
 
 
         <p:repeat value="#{visualizarIndicadorBean.listaIndicadoresProceso}" var="indicador">
-            <h1>#{indicador.nombre}</h1>
-            <p:tabView value="#{visualizarIndicadorBean.obtenerRegistroIndicador(indicador.idIndicador)}" var="registro">
-
+            <br/>
+            <h1 style="text-align: center">#{indicador.nombre}</h1>
+            <p:tabView value="#{visualizarIndicadorBean.obtenerRegistroIndicador(indicador.idIndicador)}"
+                       var="registro">
                 <p:tab title="#{visualizarIndicadorBean.obtenerMesesIndicador(registro)}">
-                    <div>
-                        <p:panel header="Analisis">
-                            <p:outputLabel value="#{registro.analisis}" escape="false"/>
-                        </p:panel>
-                        <p:panel header="Causas">
-                            <p:outputLabel value="#{registro.causas}" escape="false"/>
-                        </p:panel>
-                        <p:panel header="Propuestas">
-                            <p:outputLabel value="#{registro.propuestas}" escape="false"/>
-                        </p:panel>
+                    <div class="row">
+                        <div class="col-sm">
+                            <p:panel header="Analisis">
+                                <p:outputLabel value="#{registro.analisis}" escape="false"/>
+                            </p:panel>
+                            <p:panel header="Causas">
+                                <p:outputLabel value="#{registro.causas}" escape="false"/>
+                            </p:panel>
+                            <p:panel header="Propuestas">
+                                <p:outputLabel value="#{registro.propuestas}" escape="false"/>
+                            </p:panel>
+                        </div>
+                        <div class="col-sm">
+                            <p:chip label="Limite inferior: #{indicador.limiteInferior}" styleClass="me-1" style="background: #ffc107;"/>
+                            <p:chip label="Limite inferior: #{indicador.limiteSuperior}" styleClass="me-1" style="background: #ffc107"/>
+                            <p:chip label="Resultado: #{registro.resultadoIndicador}" styleClass="me-1" style="background: #ffc107"/>
+                            <p:chip label="Tendencia: #{indicador.tendencia}" styleClass="me-1" style="background: #ffc107"/>
+                            <p:lineChart model="#{visualizarIndicadorBean.createLineModel(indicador.idIndicador)}"
+                                         style="width: 100%; height: 500px;"/>
+                        </div>
                     </div>
                 </p:tab>
             </p:tabView>
+
+
         </p:repeat>
         <br/>
 
