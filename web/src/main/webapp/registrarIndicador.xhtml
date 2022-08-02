@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/template.xhtml">
+    <ui:define name="title">Registrar indicador</ui:define>
+    <ui:define name="content">
+
+        <br/>
+        <h:form id="formRegistro">
+            <p:panel header="Registro de indicador" id="panelPrincipal">
+                <p:growl showDetail="true"/>
+                <h:panelGrid columns="2" cellpadding="10" style="margin: 0 auto;" id="panelGrid">
+                    <p:outputLabel for="indicador" value="Indicador:"/>
+                    <p:selectOneMenu id="indicador" value="#{registroBean.registroIndicador.indicador}"
+                                     converter="#{indicadorConverter}"
+                                     requiredMessage="Debe seleccionar un indicador" style="width: 300px;"
+                                     required="true">
+                        <f:selectItem itemLabel="Seleccione el indicador" noSelectionOption="true"/>
+                        <f:selectItems var="indicador" itemLabel="#{indicador.nombre}"
+                                       value="#{registroBean.listaIndicadores}"/>
+                    </p:selectOneMenu>
+
+
+                    <p:outputLabel for="anio" value="Año:"/>
+                    <p:selectOneMenu id="anio" value="#{registroBean.registroIndicador.anio}" required="true"
+                                     style="width: 300px;">
+                        <f:selectItem itemLabel="2022" itemValue="2022"/>
+                        <f:selectItem itemLabel="2023" itemValue="2023"/>
+                        <f:selectItem itemLabel="2024" itemValue="2024"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="mes" value="Mes:"/>
+                    <p:selectOneMenu id="mes" value="#{registroBean.registroIndicador.mes}" required="true"
+                                     style="width: 300px;">
+                        <f:selectItem itemLabel="Seleccione el mes" noSelectionOption="true"/>
+                        <f:selectItem itemLabel="Enero" itemValue="1"/>
+                        <f:selectItem itemLabel="Febrero" itemValue="2"/>
+                        <f:selectItem itemLabel="Marzo" itemValue="3"/>
+                        <f:selectItem itemLabel="Abril" itemValue="4"/>
+                        <f:selectItem itemLabel="Mayo" itemValue="5"/>
+                        <f:selectItem itemLabel="Junio" itemValue="6"/>
+                        <f:selectItem itemLabel="Julio" itemValue="7"/>
+                        <f:selectItem itemLabel="Agosto" itemValue="8"/>
+                        <f:selectItem itemLabel="Septiembre" itemValue="9"/>
+                        <f:selectItem itemLabel="Octubre" itemValue="10"/>
+                        <f:selectItem itemLabel="Noviembre" itemValue="11"/>
+                        <f:selectItem itemLabel="Diciembre" itemValue="12"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="numerador" value="Numerador:"/>
+                    <p:inputNumber id="numerador" value="#{registroBean.registroIndicador.numerador}"
+                                   decimalPlaces="2"/>
+                    <p:outputLabel for="denominador" value="Denominador:"/>
+                    <p:inputNumber id="denominador" value="#{registroBean.registroIndicador.denominador}"
+                                   decimalPlaces="2"/>
+                    <p:outputLabel for="resultado" value="Resultado Indicador:"/>
+                    <p:inputNumber id="resultado" value="#{registroBean.registroIndicador.resultadoIndicador}"
+                                   decimalPlaces="2"/>
+
+                    <p:outputLabel for="analisis" value="Análisis:"/>
+                    <p:textEditor rows="6" cols="33" id="analisis" secure="false"
+                                     value="#{registroBean.registroIndicador.analisis}" autoResize="false"
+                                     required="true" height="200"/>
+
+                    <p:outputLabel for="causas" value="Causas:"/>
+                    <p:textEditor rows="5" cols="30" id="causas" value="#{registroBean.registroIndicador.causas}"
+                                     autoResize="false" required="true" secure="false" height="200"/>
+
+                    <p:outputLabel for="propuestas" value="Propuestas:"/>
+                    <p:textEditor rows="5" cols="30" id="propuestas" autoResize="false" secure="false"
+                                     value="#{registroBean.registroIndicador.propuestas}" required="true" height="200"/>
+                </h:panelGrid>
+
+                <br/>
+                <h:panelGrid cellpadding="5" columns="2" style="margin: 0 auto;">
+                    <p:commandButton value="Guardar" icon="pi pi-check" styleClass="ui-button-success"
+                                     action="#{registroBean.registrarIndicador()}" update="panelPrincipal">
+                    </p:commandButton>
+
+                    <p:commandButton value="Cancelar" icon="pi pi-times"
+                                     styleClass="ui-button-danger" update="panelGrid" process="@this">
+                        <p:resetInput target="panelGrid"/>
+                    </p:commandButton>
+                </h:panelGrid>
+
+                <p:dataTable var="registro" value="#{registroBean.listaRegistroIndicadores}" rows="10" paginator="true"
+                             id="tablaRegistro">
+                    <f:facet name="header">
+                        <div>
+                            <span class="filter-container ui-input-icon-left">
+                            <i class="pi pi-search"/>
+                            <p:inputText id="globalFilter" onkeyup="PF('tablaIndicador').filter()" placeholder="Buscar"
+                                         style="width: 400px;"/>
+                            </span>
+                        </div>
+                    </f:facet>
+
+                    <p:column headerText="Indicador">
+                        <h:outputText value="#{registro.indicador.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Mes">
+                        <h:outputText value="#{registroBean.obtenerMes(registro)}"/>
+                    </p:column>
+
+                    <p:column headerText="Año">
+                        <h:outputText value="#{registro.anio}"/>
+                    </p:column>
+
+                    <p:column headerText="Numerador">
+                        <h:outputText value="#{registro.numerador}"/>
+                    </p:column>
+
+                    <p:column headerText="Denominador">
+                        <h:outputText value="#{registro.denominador}"/>
+                    </p:column>
+
+                    <p:column headerText="Resultado">
+                        <h:outputText value="#{registro.resultadoIndicador}"/>
+                    </p:column>
+
+                    <p:column headerText="Fecha creación">
+                        <h:outputText value="#{registroBean.obtenerFecha(registro.fechaCreacion)}"/>
+                    </p:column>
+
+                    <p:column headerText="Usuario creación">
+                        <h:outputText value="#{registro.usuarioCreacion.nombre} #{registro.usuarioCreacion.apellido}"/>
+                    </p:column>
+
+                    <p:column headerText="Opciones">
+                        <p:commandButton icon="pi pi-pencil" update="formRegistro:panelGrid"
+                                         styleClass="edit-button rounded-button ui-button-success me-2"
+                                         actionListener="#{registroBean.seleccionarRegistroIndicador(registro)}"
+                                         process="@this">
+                        </p:commandButton>
+
+                        <p:commandButton icon="pi pi-trash"
+                                         styleClass="ui-button-warning rounded-button"
+                                         oncomplete="PF('deleteDialog').show()"
+                                         actionListener="#{registroBean.seleccionarRegistroIndicador(registro)}"
+                                         process="@this">
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+
+        <p:confirmDialog id="eliminar" widgetVar="deleteDialog" showEffect="fade" width="300"
+                         message="¿Desea eliminar el indicador?" header="Confirmación" severity="warn">
+            <h:form>
+                <p:commandButton value="Si" icon="pi pi-check" action="#{registroBean.inactivarRegistroIndicador}"
+                                 oncomplete="PF('deleteDialog').hide()"/>
+                <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                 onclick="PF('deleteDialog').hide()"/>
+
+                <p:growl for="hotelDelete-bean" showDetail="true"/>
+            </h:form>
+        </p:confirmDialog>
+    </ui:define>
+</ui:composition>
+</html>

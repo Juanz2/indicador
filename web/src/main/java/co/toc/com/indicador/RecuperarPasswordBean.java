@@ -8,10 +8,11 @@ import org.springframework.stereotype.Component;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import java.io.Serializable;
 
 @Component
 @ViewScoped
-public class RecuperarPasswordBean {
+public class RecuperarPasswordBean implements Serializable {
 
     @Getter
     @Setter

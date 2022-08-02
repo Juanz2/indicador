@@ -25,7 +25,7 @@
                         </f:facet>
 
                         <f:facet name="footer">
-                            <p:commandButton icon="pi pi-eye" iconPos="right" value="Visualizar"/>
+                            <p:commandButton  icon="pi pi-eye" iconPos="right" value="Visualizar" action="#{dashBoardBean.visualizarIndicadorProceso(proceso)}"/>
                         </f:facet>
                     </p:card>
                 </p:dataViewGridItem>
@@ -49,7 +49,7 @@
 
                             <p:separator/>
                             <p:commandButton value="Visualizar" styleClass="ui-button-raised" icon="pi pi-eye"
-                                             iconPos="right" style="width: 130px;"/>
+                                             iconPos="right" style="width: 130px;" action="#{dashBoardBean.visualizarIndicadorProceso(proceso)}"/>
                         </div>
 
 

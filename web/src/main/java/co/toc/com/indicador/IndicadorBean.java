@@ -12,11 +12,12 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
+import java.io.Serializable;
 import java.util.List;
 
 @ViewScoped
 @Component
-public class IndicadorBean {
+public class IndicadorBean implements Serializable {
 
     @Autowired
     private IndicadorServicio indicadorServicio;

@@ -15,4 +15,6 @@ public interface IndicadorServicio {
 
     List<Indicador> obtenerListaIndicadores();
 
+    List<Indicador> obtenerIndicadorProceso(int idProceso);
+
 }

@@ -9,10 +9,11 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.io.Serializable;
 
 @Component
 @Scope("session")
-public class SeguridadBean {
+public class SeguridadBean implements Serializable {
 
     @Getter
     @Setter

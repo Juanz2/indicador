@@ -22,9 +22,9 @@ public class RegistroIndicador implements Serializable {
     private Integer id;
 
     @Column(nullable = false, length = 4)
-    private Integer anio;
+    private String anio;
     @Column(nullable = false, length = 2)
-    private Integer mes;
+    private String mes;
 
     @Column(nullable = false)
     private double numerador;

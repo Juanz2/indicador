@@ -27,4 +27,14 @@ public class DashBoardBean {
 
         listaProcesos = procesoServicio.obtenerProcesos();
     }
+
+    /**
+     *
+     * @param proceso
+     * @return
+     */
+    public String visualizarIndicadorProceso (Proceso proceso){
+
+        return "indicador?faces-redirect=true&amp;proceso=" + proceso.getIdProceso();
+    }
 }

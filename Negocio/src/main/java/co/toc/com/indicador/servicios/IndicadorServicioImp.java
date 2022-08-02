@@ -33,4 +33,9 @@ public class IndicadorServicioImp implements IndicadorServicio {
     public List<Indicador> obtenerListaIndicadores() {
         return indicadorRepo.obtenerListaIndicadores();
     }
+
+    @Override
+    public List<Indicador> obtenerIndicadorProceso(int idProceso) {
+        return indicadorRepo.obtenerIndicadorProceso(idProceso);
+    }
 }

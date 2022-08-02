@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/template.xhtml">
+    <ui:define name="title">Indicador</ui:define>
+    <ui:define name="content">
+
+
+        <p:repeat value="#{visualizarIndicadorBean.listaIndicadoresProceso}" var="indicador">
+            <h1>#{indicador.nombre}</h1>
+            <p:tabView value="#{visualizarIndicadorBean.obtenerRegistroIndicador(indicador.idIndicador)}" var="registro">
+
+                <p:tab title="#{visualizarIndicadorBean.obtenerMesesIndicador(registro)}">
+                    <div>
+                        <p:panel header="Analisis">
+                            <p:outputLabel value="#{registro.analisis}" escape="false"/>
+                        </p:panel>
+                        <p:panel header="Causas">
+                            <p:outputLabel value="#{registro.causas}" escape="false"/>
+                        </p:panel>
+                        <p:panel header="Propuestas">
+                            <p:outputLabel value="#{registro.propuestas}" escape="false"/>
+                        </p:panel>
+                    </div>
+                </p:tab>
+            </p:tabView>
+        </p:repeat>
+        <br/>
+
+    </ui:define>
+</ui:composition>
+</html>
