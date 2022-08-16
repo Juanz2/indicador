@@ -18,7 +18,10 @@
                 <p:tab title="#{visualizarIndicadorBean.obtenerMesesIndicador(registro)}">
                     <div class="row">
                         <div class="col-sm">
-                            <p:panel header="Analisis">
+                            <p:chip label="Numerador: #{registro.numerador}" styleClass="me-1" style="background: #ffc107; font-weight: bold"/>
+                            <p:chip label="Denominador: #{registro.denominador}" styleClass="me-1" style="background: #ffc107; font-weight: bold"/>
+                            <p:chip label="Resultado: #{registro.resultadoIndicador}" styleClass="me-1" style="background: #ffc107; font-weight: bold"/>
+                            <p:panel header="Analisis" style="margin-top: 10px">
                                 <p:outputLabel value="#{registro.analisis}" escape="false"/>
                             </p:panel>
                             <p:panel header="Causas">
@@ -29,10 +32,9 @@
                             </p:panel>
                         </div>
                         <div class="col-sm">
-                            <p:chip label="Limite inferior: #{indicador.limiteInferior}" styleClass="me-1" style="background: #ffc107;"/>
-                            <p:chip label="Limite inferior: #{indicador.limiteSuperior}" styleClass="me-1" style="background: #ffc107"/>
-                            <p:chip label="Resultado: #{registro.resultadoIndicador}" styleClass="me-1" style="background: #ffc107"/>
-                            <p:chip label="Tendencia: #{indicador.tendencia}" styleClass="me-1" style="background: #ffc107"/>
+                            <p:chip label="Limite inferior: #{indicador.limiteInferior}" styleClass="me-1" style="background: #ffc107; font-weight: bold"/>
+                            <p:chip label="Limite superior: #{indicador.limiteSuperior}" styleClass="me-1" style="background: #ffc107; font-weight: bold"/>
+                            <p:chip label="Tendencia: #{indicador.tendencia}" styleClass="me-1" style="background: #ffc107; font-weight: bold"/>
                             <p:lineChart model="#{visualizarIndicadorBean.createLineModel(indicador.idIndicador)}"
                                          style="width: 100%; height: 500px;"/>
                         </div>

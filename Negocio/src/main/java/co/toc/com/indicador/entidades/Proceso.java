@@ -46,6 +46,5 @@ public class Proceso implements Serializable {
         return "3616866.png";
     }
     @ManyToMany(mappedBy = "procesos")
-    @ToString.Exclude
     private List<Usuario> usuarios;
 }

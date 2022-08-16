@@ -22,7 +22,7 @@ subprojects {
     }
 }
 
-allprojects{
+allprojects {
     group = 'co.toc.com.co'
     version = '0.0.1-SNAPSHOT'
     sourceCompatibility = '11'
@@ -30,6 +30,11 @@ allprojects{
         mavenCentral()
     }
 }
+
+tasks.named('bootJar') {
+    launchScript()
+}
+
 test {
     useJUnitPlatform()
 }

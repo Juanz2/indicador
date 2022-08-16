@@ -37,4 +37,15 @@ public class DashBoardBean {
 
         return "indicador?faces-redirect=true&amp;proceso=" + proceso.getIdProceso();
     }
+
+
+    /**
+     *
+     * @param proceso
+     * @return
+     */
+    public String registrarIndicador (Proceso proceso){
+
+        return "registrarIndicador?faces-redirect=true&amp;proceso=" + proceso.getIdProceso();
+    }
 }

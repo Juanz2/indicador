@@ -38,7 +38,6 @@ public class Usuario implements Serializable {
     private String estado;
 
     @ManyToMany
-    @ToString.Exclude
     private List<Proceso> procesos;
 
     @OneToMany(mappedBy = "usuarioCreacion")

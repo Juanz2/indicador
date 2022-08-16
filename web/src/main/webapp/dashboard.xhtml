@@ -21,7 +21,7 @@
                             #{proceso.nombre}
                         </f:facet>
                         <f:facet name="footer">
-                            <p:commandButton icon="pi pi-plus-circle" iconPos="right" value="Registrar" styleClass="m-5"/>
+                            <p:commandButton icon="pi pi-plus-circle" iconPos="right" value="Registrar" styleClass="m-5" action="#{dashBoardBean.registrarIndicador(proceso)}"/>
                         </f:facet>
 
                         <f:facet name="footer">
@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-lg-2 col-md-1 align-self-center">
                             <p:commandButton value="Registrar" styleClass="ui-button-raised" icon="pi pi-plus-circle"
-                                             iconPos="right" style="width: 130px;"/>
+                                             iconPos="right" style="width: 130px;" action="#{dashBoardBean.registrarIndicador(proceso)}"/>
 
                             <p:separator/>
                             <p:commandButton value="Visualizar" styleClass="ui-button-raised" icon="pi pi-eye"

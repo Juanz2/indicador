@@ -43,6 +43,9 @@ public class RegistroBean implements Serializable {
     @Setter
     private RegistroIndicador registroIndicador;
 
+    @Value("#{param['proceso']}")
+    private String procesoBusqueda;
+
     @Value(value = "#{seguridadBean.usuario}")
     private Usuario usuarioSesion;
 
@@ -50,8 +53,8 @@ public class RegistroBean implements Serializable {
     @PostConstruct
     public void init() {
         registroIndicador = new RegistroIndicador();
-        listaIndicadores = indicadorServicio.obtenerListaIndicadores();
-        listaRegistroIndicadores = registroIndicadorServicio.obtenerRegistroIndicadores();
+        listaIndicadores = indicadorServicio.obtenerIndicadorProceso(Integer.parseInt(procesoBusqueda));
+        listaRegistroIndicadores = registroIndicadorServicio.obtenerRegistroIndicadorProceso(Integer.parseInt(procesoBusqueda));
     }
 
     /**
@@ -65,7 +68,7 @@ public class RegistroBean implements Serializable {
 
         registroIndicadorServicio.registarIndicador(registroIndicador);
 
-        return "/registrarIndicador?faces-redirect=true";
+        return "/registrarIndicador?proceso="+procesoBusqueda+"faces-redirect=true";
 
     }
 
@@ -80,7 +83,8 @@ public class RegistroBean implements Serializable {
 
     public String inactivarRegistroIndicador() {
         registroIndicadorServicio.inactivarRegistroIndicador(registroIndicador);
-        return "/registrarIndicador?faces-redirect=true";
+        return "/registrarIndicador?proceso="+procesoBusqueda+"faces-redirect=true";
+
     }
 
     /**
