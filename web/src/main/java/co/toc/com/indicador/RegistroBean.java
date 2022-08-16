@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -49,6 +51,10 @@ public class RegistroBean implements Serializable {
     @Value(value = "#{seguridadBean.usuario}")
     private Usuario usuarioSesion;
 
+    @Getter
+    @Setter
+    private boolean editar = false;
+
 
     @PostConstruct
     public void init() {
@@ -61,14 +67,17 @@ public class RegistroBean implements Serializable {
      * Realiza la creación del indicador
      */
     public String registrarIndicador() {
-
-        registroIndicador.setEstado("A");
-        registroIndicador.setFechaCreacion(LocalDateTime.now());
-        registroIndicador.setUsuarioCreacion(usuarioSesion);
-
-        registroIndicadorServicio.registarIndicador(registroIndicador);
-
-        return "/registrarIndicador?proceso="+procesoBusqueda+"faces-redirect=true";
+        try {
+            registroIndicador.setEstado("A");
+            registroIndicador.setFechaCreacion(LocalDateTime.now());
+            registroIndicador.setUsuarioCreacion(usuarioSesion);
+            registroIndicadorServicio.registrarIndicador(registroIndicador, editar);
+        } catch (Exception e) {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("", fm);
+            return null;
+        }
+        return "/registrarIndicador?proceso=" + procesoBusqueda + "faces-redirect=true";
 
     }
 
@@ -78,12 +87,13 @@ public class RegistroBean implements Serializable {
      * @param registroIndicador
      */
     public void seleccionarRegistroIndicador(RegistroIndicador registroIndicador) {
+        editar = true;
         this.registroIndicador = registroIndicador;
     }
 
     public String inactivarRegistroIndicador() {
         registroIndicadorServicio.inactivarRegistroIndicador(registroIndicador);
-        return "/registrarIndicador?proceso="+procesoBusqueda+"faces-redirect=true";
+        return "/registrarIndicador?proceso=" + procesoBusqueda + "faces-redirect=true";
 
     }
 

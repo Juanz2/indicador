@@ -11,8 +11,12 @@
 
 
         <p:repeat value="#{visualizarIndicadorBean.listaIndicadoresProceso}" var="indicador">
-            <br/>
-            <h1 style="text-align: center">#{indicador.nombre}</h1>
+
+            <h:form rendered="#{visualizarIndicadorBean.obtenerRegistroIndicador(indicador.idIndicador).size() != 0}">
+                <br/>
+                <h1  style="text-align: center">#{indicador.nombre} </h1>
+            </h:form>
+
             <p:tabView value="#{visualizarIndicadorBean.obtenerRegistroIndicador(indicador.idIndicador)}"
                        var="registro">
                 <p:tab title="#{visualizarIndicadorBean.obtenerMesesIndicador(registro)}">

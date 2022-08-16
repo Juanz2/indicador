@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RegistroIndicadorServicio {
 
-    RegistroIndicador registarIndicador(RegistroIndicador registroIndicador);
+    RegistroIndicador registrarIndicador(RegistroIndicador registroIndicador, boolean editar) throws Exception;
 
     RegistroIndicador obtenerRegistroIndicador(Integer id);
 
