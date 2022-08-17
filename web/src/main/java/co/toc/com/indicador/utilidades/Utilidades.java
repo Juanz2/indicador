@@ -2,6 +2,8 @@ package co.toc.com.indicador.utilidades;
 
 import co.toc.com.indicador.entidades.RegistroIndicador;
 
+import java.text.DecimalFormat;
+
 public class Utilidades {
 
     /**
@@ -39,5 +41,18 @@ public class Utilidades {
                 return "Diciembre";
         }
         return null;
+    }
+
+    /**
+     * Retorna el valor en un String
+     * @param valor
+     * @return
+     */
+    public String obtenerValorString (double valor){
+
+        DecimalFormat df = new DecimalFormat("#");
+        df.setMaximumFractionDigits(0);
+        return df.format(valor);
+
     }
 }

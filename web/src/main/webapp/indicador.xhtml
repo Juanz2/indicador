@@ -22,8 +22,8 @@
                 <p:tab title="#{visualizarIndicadorBean.obtenerMesesIndicador(registro)}">
                     <div class="row">
                         <div class="col-sm">
-                            <p:chip label="Numerador: #{registro.numerador}" styleClass="me-1" style="background: #ffc107; font-weight: bold"/>
-                            <p:chip label="Denominador: #{registro.denominador}" styleClass="me-1" style="background: #ffc107; font-weight: bold"/>
+                            <p:chip label="Numerador: #{visualizarIndicadorBean.obtenerValorString(registro.numerador)}" styleClass="me-1" style="background: #ffc107; font-weight: bold"/>
+                            <p:chip label="Denominador: #{visualizarIndicadorBean.obtenerValorString(registro.denominador)}" styleClass="me-1" style="background: #ffc107; font-weight: bold"/>
                             <p:chip label="Resultado: #{registro.resultadoIndicador}" styleClass="me-1" style="background: #ffc107; font-weight: bold"/>
                             <p:panel header="Analisis" style="margin-top: 10px">
                                 <p:outputLabel value="#{registro.analisis}" escape="false"/>

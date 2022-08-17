@@ -18,7 +18,7 @@
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
             <div>
-                <h:form>
+                <h:form rendered="#{seguridadBean.autenticado}">
                     <p:commandButton id="menuButton" type="button" icon="pi pi-bars" styleClass="me-4"/>
                     <p:tieredMenu overlay="true" trigger="menuButton" my="left top" at="left bottom"
                                   style="width: 300px">
@@ -36,14 +36,13 @@
                 </h:form>
             </div>
 
-            <a href="dashboard.xhtml" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                <h:graphicImage library="img" name="iconoPrincipal.png" styleClass="icono-p"/>
-            </a>
+                <a href="dashboard.xhtml" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <h:graphicImage rendered="#{seguridadBean.autenticado}" library="img" name="iconoPrincipal.png" styleClass="icono-p"/>
+                </a>
 
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="dashboard.xhtml" class="nav-link px-2 text-white">Indicadores</a></li>
-            </ul>
-
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="dashboard.xhtml" class="nav-link px-2 text-white">Indicadores</a></li>
+                </ul>
 
 
             <h:form rendered="#{seguridadBean.autenticado}">

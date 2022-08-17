@@ -112,11 +112,11 @@
                     </p:column>
 
                     <p:column headerText="Numerador">
-                        <h:outputText value="#{registro.numerador}"/>
+                        <h:outputText value="#{registroBean.obtenerValorString(registro.numerador)}"/>
                     </p:column>
 
                     <p:column headerText="Denominador">
-                        <h:outputText value="#{registro.denominador}"/>
+                        <h:outputText value="#{registroBean.obtenerValorString(registro.denominador)}"/>
                     </p:column>
 
                     <p:column headerText="Resultado">

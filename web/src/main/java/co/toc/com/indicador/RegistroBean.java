@@ -18,6 +18,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -118,5 +119,16 @@ public class RegistroBean implements Serializable {
     public String obtenerMes(RegistroIndicador registroIndicador) {
         Utilidades utilidades = new Utilidades();
         return utilidades.obtenerMes(registroIndicador);
+    }
+
+    /**
+     * Retorna el valor en un String
+     * @param valor
+     * @return
+     */
+    public String obtenerValorString (double valor){
+        Utilidades utilidades =  new Utilidades();
+        return utilidades.obtenerValorString(valor);
+
     }
 }
