@@ -24,7 +24,7 @@ public class RegistroIndicadorServicioImp implements RegistroIndicadorServicio {
         } else {
             List<RegistroIndicador> registroIndicadorValidar = registroIndicadorRepo.obtenerIndicadorValidar(registroIndicador.getMes(), registroIndicador.getIndicador().getIdIndicador(), registroIndicador.getAnio());
             Utilidades utilidades = new Utilidades();
-            if (registroIndicadorValidar != null) {
+            if (registroIndicadorValidar.size() > 0) {
                 throw new Exception("El indicador " + registroIndicador.getIndicador().getNombre() + " ya se encuentra registrado " +
                         "para el mes " + utilidades.obtenerMes(registroIndicador) + " del año " + registroIndicador.getAnio());
             } else {

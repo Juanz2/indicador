@@ -26,14 +26,13 @@ public class RegistroIndicador implements Serializable {
     @Column(nullable = false, length = 2)
     private String mes;
 
-    @Column(nullable = false)
-    private double numerador;
+
+    private Double numerador;
 
     @Column(nullable = false)
-    private double denominador;
+    private Double denominador;
 
-    @Column(nullable = false)
-    private double resultadoIndicador;
+    private Double resultadoIndicador;
 
     @Lob
     @Column(nullable = false)

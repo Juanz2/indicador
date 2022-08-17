@@ -27,7 +27,6 @@ import java.util.List;
 public class VisualizarIndicadorBean implements Serializable {
 
 
-
     @Autowired
     private RegistroIndicadorServicio registroIndicadorServicio;
     @Autowired
@@ -74,7 +73,6 @@ public class VisualizarIndicadorBean implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public LineChartModel createLineModel(int idIndicador) {
@@ -84,20 +82,39 @@ public class VisualizarIndicadorBean implements Serializable {
         registroIndicadores = obtenerRegistroIndicador(idIndicador);
         ChartData data = new ChartData();
         LineChartDataSet dataSet = new LineChartDataSet();
+        LineChartDataSet dataSetLimiteSuperior = new LineChartDataSet();
+        LineChartDataSet dataSetLimiteInferior = new LineChartDataSet();
+        List<Object> valuesLimiteSuperior = new ArrayList<>();
+        List<Object> valuesLimiteInferior = new ArrayList<>();
         List<Object> values = new ArrayList<>();
         List<String> labels = new ArrayList<>();
         Utilidades utilidades = new Utilidades();
-        for (RegistroIndicador registroIndicador : registroIndicadores){
-            values.add(registroIndicador.getResultadoIndicador());
+        for (RegistroIndicador registroIndicador : registroIndicadores) {
             labels.add(utilidades.obtenerMes(registroIndicador));
+            values.add(registroIndicador.getResultadoIndicador());
+            valuesLimiteSuperior.add(registroIndicador.getIndicador().getLimiteSuperior());
+            valuesLimiteInferior.add(registroIndicador.getIndicador().getLimiteInferior());
         }
         dataSet.setData(values);
+
         dataSet.setFill(false);
         dataSet.setLabel("Resultado");
         dataSet.setBorderColor("rgb(25, 33, 240)");
         dataSet.setTension(0.1);
         data.addChartDataSet(dataSet);
         data.setLabels(labels);
+
+        // Se crea dataset para darle color verde al limite superior
+        dataSetLimiteSuperior.setData(valuesLimiteSuperior);
+        dataSetLimiteSuperior.setLabel("Limite superior");
+        dataSetLimiteSuperior.setBorderColor("rgb(0,255,0)");
+        data.addChartDataSet(dataSetLimiteSuperior);
+
+        // Se crea dataset para darle color verde al limite inferior
+        dataSetLimiteInferior.setData(valuesLimiteInferior);
+        dataSetLimiteInferior.setLabel("Limite inferior");
+        dataSetLimiteInferior.setBorderColor("rgb(227,21,21)");
+        data.addChartDataSet(dataSetLimiteInferior);
 
         //Options
         LineChartOptions options = new LineChartOptions();
@@ -115,11 +132,12 @@ public class VisualizarIndicadorBean implements Serializable {
 
     /**
      * Retorna el valor en un String
+     *
      * @param valor
      * @return
      */
-    public String obtenerValorString (double valor){
-        Utilidades utilidades =  new Utilidades();
+    public String obtenerValorString(double valor) {
+        Utilidades utilidades = new Utilidades();
         return utilidades.obtenerValorString(valor);
 
     }

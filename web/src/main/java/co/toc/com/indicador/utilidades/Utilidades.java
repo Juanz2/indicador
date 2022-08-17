@@ -51,7 +51,7 @@ public class Utilidades {
     public String obtenerValorString (double valor){
 
         DecimalFormat df = new DecimalFormat("#");
-        df.setMaximumFractionDigits(0);
+        df.setMaximumFractionDigits(2);
         return df.format(valor);
 
     }

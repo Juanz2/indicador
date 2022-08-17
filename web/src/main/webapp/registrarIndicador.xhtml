@@ -52,13 +52,13 @@
                     </p:selectOneMenu>
 
                     <p:outputLabel for="numerador" value="Numerador:"/>
-                    <p:inputNumber id="numerador" value="#{registroBean.registroIndicador.numerador}"
+                    <p:inputNumber id="numerador" emptyValue="empty" value="#{registroBean.registroIndicador.numerador}"
                                    decimalPlaces="2"/>
                     <p:outputLabel for="denominador" value="Denominador:"/>
-                    <p:inputNumber id="denominador" value="#{registroBean.registroIndicador.denominador}"
-                                   decimalPlaces="2"/>
+                    <p:inputNumber id="denominador" emptyValue="empty" value="#{registroBean.registroIndicador.denominador}"
+                                   decimalPlaces="2" required="true"/>
                     <p:outputLabel for="resultado" value="Resultado Indicador:"/>
-                    <p:inputNumber id="resultado" value="#{registroBean.registroIndicador.resultadoIndicador}"
+                    <p:inputNumber id="resultado" emptyValue="empty" value="#{registroBean.registroIndicador.resultadoIndicador}"
                                    decimalPlaces="2"/>
 
                     <p:outputLabel for="analisis" value="Análisis:"/>
