@@ -13,6 +13,6 @@ public interface IndicadorRepo extends JpaRepository<Indicador, Integer> {
     @Query("select i from Indicador  i where i.estado = 'A'")
     List<Indicador> obtenerListaIndicadores();
 
-    @Query("select i from Indicador i join i.proceso p where p.idProceso = :idProceso and p.estado = 'A'")
+    @Query("select i from Indicador i join i.proceso p where p.idProceso = :idProceso and p.estado = 'A' and p.estado = 'A'")
     List<Indicador> obtenerIndicadorProceso(int idProceso);
 }

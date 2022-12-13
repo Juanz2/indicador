@@ -31,10 +31,10 @@ public class Indicador implements Serializable {
     private String tendencia;
 
     @Column(nullable = false)
-    private Integer limiteInferior;
+    private Double limiteInferior;
 
     @Column(nullable = false)
-    private Integer limiteSuperior;
+    private Double limiteSuperior;
 
     @Column(length = 1, nullable = false)
     private String estado;
