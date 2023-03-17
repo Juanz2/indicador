@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.SessionScoped;
+import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -44,11 +46,15 @@ public class VisualizarIndicadorBean implements Serializable {
     @Setter
     private List<Indicador> listaIndicadoresProceso;
 
+    @Getter
+    @Setter
+    private String anio;
+
+
     @PostConstruct
     public void init() {
 
-        //  listaRegistroIndicadores = registroIndicadorServicio.obtenerRegistroIndicador();
-        //createLineModel();
+        this.anio = "2023";
         listaIndicadoresProceso = indicadorServicio.obtenerIndicadorProceso(Integer.parseInt(procesoBusqueda));
     }
 
@@ -69,7 +75,12 @@ public class VisualizarIndicadorBean implements Serializable {
      * @return
      */
     public List<RegistroIndicador> obtenerRegistroIndicador(int idIndicador) {
-        return registroIndicadorServicio.obtenerRegistroIndicador(idIndicador);
+        if(listaIndicadoresProceso != null || listaIndicadoresProceso.size() ==  0){
+            listaIndicadoresProceso = indicadorServicio.obtenerIndicadorProceso(Integer.parseInt(procesoBusqueda));
+        }
+        listaRegistroIndicadores = registroIndicadorServicio.obtenerRegistroIndicador(idIndicador, this.anio);
+
+        return listaRegistroIndicadores;
     }
 
     /**
@@ -140,5 +151,10 @@ public class VisualizarIndicadorBean implements Serializable {
         Utilidades utilidades = new Utilidades();
         return utilidades.obtenerValorString(valor);
 
+    }
+
+    public void mostrar(){
+        this.listaRegistroIndicadores.clear();
+        this.listaIndicadoresProceso.clear();
     }
 }

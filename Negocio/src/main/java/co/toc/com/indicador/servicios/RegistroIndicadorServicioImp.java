@@ -55,7 +55,9 @@ public class RegistroIndicadorServicioImp implements RegistroIndicadorServicio {
     }
 
     @Override
-    public List<RegistroIndicador> obtenerRegistroIndicador(int idIndicador) {
-        return registroIndicadorRepo.obtenerRegistroIndicador(idIndicador);
+    public List<RegistroIndicador> obtenerRegistroIndicador(int idIndicador, String anio) {
+        return registroIndicadorRepo.obtenerRegistroIndicador(idIndicador, anio);
     }
+
+
 }

@@ -16,6 +16,6 @@ public interface RegistroIndicadorServicio {
 
     List<RegistroIndicador> obtenerRegistroIndicadorProceso(int idProceso);
 
-    List<RegistroIndicador> obtenerRegistroIndicador(int idIndicador);
+    List<RegistroIndicador> obtenerRegistroIndicador(int idIndicador, String anio);
 
 }

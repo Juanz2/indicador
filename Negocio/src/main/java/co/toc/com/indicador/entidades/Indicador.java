@@ -42,5 +42,4 @@ public class Indicador implements Serializable {
     @OneToMany(mappedBy = "indicador")
     private List<RegistroIndicador> registroIndicadores;
 
-
 }

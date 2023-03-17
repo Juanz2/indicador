@@ -39,6 +39,8 @@ public class IndicadorBean implements Serializable {
     private List<Indicador> listaIndicadores;
 
 
+
+
     @PostConstruct
     public void init() {
 

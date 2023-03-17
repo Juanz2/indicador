@@ -18,8 +18,8 @@ public interface RegistroIndicadorRepo extends JpaRepository<RegistroIndicador, 
             "where p.idProceso = :idProceso and ri.estado = 'A' order by ind.nombre asc")
     List<RegistroIndicador> obtenerRegistroIndicadorProceso(int idProceso);
 
-    @Query("select ri from RegistroIndicador  ri join ri.indicador ind  where ind.idIndicador = :idIndicador and ri.estado = 'A' order by ri.mes asc")
-    List<RegistroIndicador> obtenerRegistroIndicador(int idIndicador);
+    @Query("select ri from RegistroIndicador  ri join ri.indicador ind  where ind.idIndicador = :idIndicador and ri.estado = 'A'  and ri.anio = :anio order by ri.mes asc")
+    List<RegistroIndicador> obtenerRegistroIndicador(int idIndicador, String anio);
 
     @Query("select ri from RegistroIndicador  ri join ri.indicador ind where ri.mes = :mes " +
             "and ind.idIndicador = :indicador and ri.anio = :anio and ri.estado = 'A'")

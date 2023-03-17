@@ -131,4 +131,8 @@ public class RegistroBean implements Serializable {
         return utilidades.obtenerValorString(valor);
 
     }
+
+    public void mostrar(){
+        System.out.println(this.registroIndicador.getAnio());
+    }
 }

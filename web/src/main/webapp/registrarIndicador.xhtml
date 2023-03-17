@@ -21,16 +21,19 @@
                                      required="true">
                         <f:selectItem itemLabel="Seleccione el indicador" noSelectionOption="true"/>
                         <f:selectItems var="indicador" itemLabel="#{indicador.nombre}"
-                                       value="#{registroBean.listaIndicadores}"/>
+                                       value="#{registroBean.listaIndicadores}" />
+
                     </p:selectOneMenu>
 
 
                     <p:outputLabel for="anio" value="Año:"/>
                     <p:selectOneMenu id="anio" value="#{registroBean.registroIndicador.anio}" required="true"
                                      style="width: 300px;">
-                        <f:selectItem itemLabel="2022" itemValue="2022"/>
                         <f:selectItem itemLabel="2023" itemValue="2023"/>
                         <f:selectItem itemLabel="2024" itemValue="2024"/>
+                        <f:selectItem itemLabel="2025" itemValue="2025"/>
+                        <p:ajax
+                                listener="#{registroBean.mostrar()}" />
                     </p:selectOneMenu>
 
                     <p:outputLabel for="mes" value="Mes:"/>
