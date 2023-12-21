@@ -60,4 +60,9 @@ public class SeguridadBean implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/index?faces-redirect=true";
     }
+
+    public String mostrarPerfil(){
+
+        return "/perfil?faces-redirect=true&amp;usuario=" + usuario.getIdUsuario();
+    }
 }

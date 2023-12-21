@@ -8,8 +8,8 @@
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-    <h:outputStylesheet library="css" name="styleUni.css"/>
+    <link rel="stylesheet" type="text/css" href="../resources/resources/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../resources/resources/css/styleUni.css" />
     <title><ui:insert name="title">Título</ui:insert></title>
 </h:head>
 <h:body>
@@ -51,7 +51,7 @@
                 <i class="pi pi-caret-down"/>
                 <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
                     <p:submenu>
-                        <p:menuitem value="Perfil" ajax="false"
+                        <p:menuitem value="Perfil" action="#{seguridadBean.mostrarPerfil()}"
                                     icon="pi pi-user"/>
                         <p:menuitem value="Cerrar sesión" action="#{seguridadBean.cerrarSesion()}"
                                     icon="pi pi-sign-out"/>

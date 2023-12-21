@@ -5,7 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<ui:composition template="/WEB-INF/template.xhtml">
+<ui:composition template="WEB-INF/template.xhtml">
     <ui:define name="title">Adminstrar procesos</ui:define>
     <ui:define name="content">
 
@@ -59,7 +59,7 @@
 
 
                     <p:column headerText="Imagen" exportable="false">
-                        <img alt="Proceso header" src="uploads/#{proceso.imagenPrincipal}"   style="width: 70px;"/>
+                        <img alt="Proceso header" src="uploads#{proceso.imagenPrincipal}" style="width: 70px;"/>
                     </p:column>
 
                     <p:column headerText="Opciones">

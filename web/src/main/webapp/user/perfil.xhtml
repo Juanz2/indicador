@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="WEB-INF/template.xhtml">
+    <ui:define name="title">Dashboard</ui:define>
+    <ui:define name="content">
+        <div id="contenido" class="container">
+            <h:form id="formUsuario">
+                <br/>
+                <p:panel header="Perfil" id="panelPrincipal" styleClass="ui-panel">
+                    <p:growl showDetail="true" id="growl1"/>
+                    <h:panelGrid columns="2" cellpadding="5" style="margin: 0 auto;" id="panelGrid">
+                        <p:outputLabel for="foto" value="Foto: "/>
+                        <p:fileUpload id="foto"
+                                      listener="#{perfilBean.subirImagenes}" mode="advanced"
+                                      multiple="true" sizeLimit="1000000" fileLimit="5"
+                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" uploadLabel="Cargar" cancelLabel="Cancelar"/>
+
+                        <p:outputLabel for="name" value="Nombre:"/>
+                        <p:inputText id="name" value="#{perfilBean.usuario.nombre}" required="true"
+                                     style="width: 300px" disabled="true"/>
+
+                        <p:outputLabel for="apellido" value="Apellido:"/>
+                        <p:inputText id="apellido" value="#{perfilBean.usuario.apellido}" required="true"
+                                     style="width: 300px" disabled="true"/>
+
+                        <p:outputLabel for="email" value="Correo:"/>
+                        <p:inputText id="email" value="#{perfilBean.usuario.email}" required="true"
+                                     style="width: 300px" disabled="true"/>
+                    </h:panelGrid>
+                    <br/>
+                    <h:panelGrid cellpadding="5" columns="2" style="margin: 0 auto;">
+                        <p:commandButton value="Actualizar" icon="pi pi-check" styleClass="ui-button-success"
+                                         action="#{perfilBean.actualizarUsuario()}" update="panelPrincipal">
+                        </p:commandButton>
+
+                    </h:panelGrid>
+
+                    <hr/>
+                    <h3>Cambiar contraseña</h3>
+                    <h:panelGrid columns="2" cellpadding="5" style="margin: 0 auto;" id="panelGridPwd">
+
+                    <p:outputLabel value="Ingresa tu contraseña:" for="password1"/>
+                    <p:password id="password1" value="#{perfilBean.password1}" feedback="true"
+                                promptLabel="Ingresa tu contraseña" weakLabel="Débil"
+                                goodLabel="Buena" strongLabel="Fuerte"/>
+
+                    <p:outputLabel value="Repita la contraseña:" for="password2"/>
+                    <p:password id="password2" value="#{perfilBean.password2}" feedback="true"
+                                promptLabel="Repita la contraseña" weakLabel="Débil"
+                                goodLabel="Buena" strongLabel="Fuerte"/>
+                    </h:panelGrid>
+                    <br/>
+                    <h:panelGrid cellpadding="5" columns="2" style="margin: 0 auto;">
+                        <p:commandButton value="Cambiar Contraseña" icon="pi pi-check" styleClass="ui-button-success"
+                                         action="#{perfilBean.cambiarPassword()}" update="panelPrincipal">
+                        </p:commandButton>
+
+                    </h:panelGrid>
+                </p:panel>
+                <p:growl showDetail="true"/>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

@@ -17,8 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.SessionScoped;
-import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,8 +31,6 @@ public class VisualizarIndicadorBean implements Serializable {
     private RegistroIndicadorServicio registroIndicadorServicio;
     @Autowired
     private IndicadorServicio indicadorServicio;
-
-    private int idIndicador;
 
     @Value("#{param['proceso']}")
     private String procesoBusqueda;
@@ -61,7 +57,7 @@ public class VisualizarIndicadorBean implements Serializable {
     /**
      * Obtiene los meses del indicador
      *
-     * @return
+     * @return obtiene el nombre del mes del registro de indicador
      */
     public String obtenerMesesIndicador(RegistroIndicador registroIndicador) {
         String mes;
@@ -71,20 +67,18 @@ public class VisualizarIndicadorBean implements Serializable {
     }
 
     /**
-     * @param idIndicador
-     * @return
+     * Obtiene el registro de los indicadores por proceso
+     * @param idIndicador indicador del proceso
+     *
+     * @return lista de registro de indicadores
      */
     public List<RegistroIndicador> obtenerRegistroIndicador(int idIndicador) {
-        if(listaIndicadoresProceso != null || listaIndicadoresProceso.size() ==  0){
-            listaIndicadoresProceso = indicadorServicio.obtenerIndicadorProceso(Integer.parseInt(procesoBusqueda));
-        }
-        listaRegistroIndicadores = registroIndicadorServicio.obtenerRegistroIndicador(idIndicador, this.anio);
-
-        return listaRegistroIndicadores;
+        return registroIndicadorServicio.obtenerRegistroIndicador(idIndicador, this.anio);
     }
 
     /**
-     * @return
+     * Método ecargado de realizar la gráfica del indicador
+     * @return lista de datos para la creación de la gráfica
      */
     public LineChartModel createLineModel(int idIndicador) {
 
@@ -144,17 +138,12 @@ public class VisualizarIndicadorBean implements Serializable {
     /**
      * Retorna el valor en un String
      *
-     * @param valor
-     * @return
+     * @param valor numero en tipo de dato double para pasarlo a String
+     * @return numero en formato String
      */
     public String obtenerValorString(double valor) {
         Utilidades utilidades = new Utilidades();
         return utilidades.obtenerValorString(valor);
-
     }
 
-    public void mostrar(){
-        this.listaRegistroIndicadores.clear();
-        this.listaIndicadoresProceso.clear();
-    }
 }
