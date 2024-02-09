@@ -1,4 +1,4 @@
-package co.toc.com.indicador;
+package co.toc.com.indicador.bean;
 
 
 import co.toc.com.indicador.entidades.Indicador;

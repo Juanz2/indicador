@@ -42,4 +42,5 @@ public class Usuario implements Serializable {
 
     @OneToMany(mappedBy = "usuarioCreacion")
     private List<RegistroIndicador> registroIndicadores;
+    private String foto;
 }

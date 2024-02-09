@@ -1,4 +1,4 @@
-package co.toc.com.indicador;
+package co.toc.com.indicador.bean;
 
 import co.toc.com.indicador.entidades.Usuario;
 import co.toc.com.indicador.servicios.UsuarioServicio;
@@ -44,7 +44,7 @@ public class SeguridadBean implements Serializable {
         try {
             usuario = usuarioServicio.obtenerUsuarioLogin(email, password);
             autenticado = true;
-            return "/dashboard?faces-redirect=true";
+            return "/user/dashboard?faces-redirect=true";
         } catch (Exception e) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("", fm);
